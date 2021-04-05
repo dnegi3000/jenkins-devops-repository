@@ -1,7 +1,7 @@
 //Delrative
 pipeline {
 	agent any 
-	stages {
+	stages {	
 	stage('Build') {
 		steps{
 		echo "Build"
@@ -21,14 +21,17 @@ pipeline {
 post {
 
 	always {
-		echo "Build finishd."
+		echo "Custom :Build finishd."
 	}
 	success {
-		echo "Success"
+		echo "Custom :Success"
 
 	}
 	failure {
-		chho "Error "
+		chho "Custom : Error "
+	}
+	changed {
+		chho "Custom : Build status Changed  "
 	}
 }
 
