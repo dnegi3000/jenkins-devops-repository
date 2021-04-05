@@ -17,6 +17,18 @@ pipeline {
 		echo "Integratin test"
 		}
 	}
+} post {
+
+	always {
+		echo "Build finishd."
+	}
+	success {
+		echo "Success"
+
+	}
+	failure {
+		chho "Error "
+	}
 }
 
 }
