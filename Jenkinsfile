@@ -36,6 +36,30 @@ pipeline {
 		sh 'failsafe:integration-test failsafe:verify'
 		}
 	}
+
+	stage ('build docker image '){
+		steps {
+			//old way 	
+			//docker build -t dnegi3000/test-jenkins-currency-conversion:$env.BUILD_TAG
+		  //new 
+		  script {
+			 dockerImage = docker.build("dnegi3000/test-jenkins-currency-conversion:${env.BUILD_TAG}");
+		  } 
+		}
+	}
+
+	stage ('Push docker image '){
+		steps {
+			echo "Pushing image "
+			//docker build -t dnegi3000/test-jenkins-currency-conversion
+			script {
+				docker.withRegistry('','mydockerhub'){
+				dockerImage.push();
+				dockerImage.push('latest');
+				}
+			}
+		}
+	}
 }
 post {
 
@@ -47,10 +71,10 @@ post {
 
 	}
 	failure {
-		chho "Custom : Error "
+		echo "Custom : Error "
 	}
 	changed {
-		chho "Custom : Build status Changed  "
+		echo "Custom : Build status Changed  "
 	}
 }
 
