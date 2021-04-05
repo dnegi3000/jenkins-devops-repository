@@ -32,8 +32,15 @@ pipeline {
 	}
 	stage('Integratin test') {
 		steps{
-		echo "Integratin testing "
-		sh 'failsafe:integration-test failsafe:verify'
+		echo "Integration testing "
+		sh 'mvn failsafe:integration-test failsafe:verify'
+		}
+	}
+
+	stage('build jar pakaging ') {
+		steps{
+		echo "Pakaging  "
+		sh 'mvn package'
 		}
 	}
 
