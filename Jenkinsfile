@@ -1,12 +1,21 @@
-node {
+//Delrative
+pipeline {
+	agent any 
+	stages {}
 	stage('Build') {
+		steps{
 		echo "Build"
+		}
 	}
-	stage('Test') {
-		echo "Test"
+	stage('test') {
+		steps{
+		echo "test"
+		}
 	}
-	stage('Intgration test') {
-		echo "Test"
+	stage('Integratin test') {
+		steps{
+		echo "Integratin test"
+		}
 	}
 
 
