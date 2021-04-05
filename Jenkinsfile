@@ -17,7 +17,8 @@ pipeline {
 		echo "Integratin test"
 		}
 	}
-} post {
+}
+post {
 
 	always {
 		echo "Build finishd."
