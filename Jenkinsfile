@@ -1,7 +1,7 @@
 //Delrative
 pipeline {
 	agent any 
-	stages {}
+	stages {
 	stage('Build') {
 		steps{
 		echo "Build"
@@ -17,6 +17,6 @@ pipeline {
 		echo "Integratin test"
 		}
 	}
-
+}
 
 }
