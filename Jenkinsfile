@@ -1,6 +1,12 @@
 //Delrative
 pipeline {
-	agent {docker {image 'maven:3.6.3'}} 
+	//agent {docker {image 'maven:3.6.3'}} 
+	agent any 
+	environment {
+		mavenHome = tool 'mymaven'
+		dockerHome = tool 'mydocker'
+		PATH ="$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
 	stages {	
 	stage('Build') {
 		steps{
@@ -9,14 +15,25 @@ pipeline {
 		
 		}
 	}
+
+	stage('compile') {
+		steps{
+			echo "Building ....."
+			sh 'mvn clean compile'
+		
+		}
+	}
+
 	stage('test') {
 		steps{
-		echo "test"
+		echo "testing "
+		sh 'mvn test'
 		}
 	}
 	stage('Integratin test') {
 		steps{
-		echo "Integratin test"
+		echo "Integratin testing "
+		sh 'failsafe:integration-test failsafe:verify'
 		}
 	}
 }
